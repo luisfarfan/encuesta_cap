@@ -61,5 +61,14 @@ order by count(id_cursos) desc limit 5";
         $query=  $this->db->query($sql);
         return $query->result_Array();
     }
-
+    public function detalleCursos(){
+        $sql="select nombre_tipo,idtipo_cursos,descripcion_curso,count(c.id_cursos) as cantidad,
+CAST((select count(id_cursos) from cursos_by_persona csu where csu.id_cursos=c.id_cursos group by id_cursos)*100/
+(select count(nombre_tipo) from cursos_by_persona csub where csub.idtipo_cursos=c.idtipo_cursos group by nombre_tipo) as decimal(4,1))
+as porcentaje
+from cursos_by_persona c
+group by id_cursos";
+        $query=$this->db->query($sql);
+        return $query->result_Array();
+    }
 }

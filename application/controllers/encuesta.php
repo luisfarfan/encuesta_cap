@@ -95,5 +95,6 @@ class Encuesta extends CI_Controller {
         $debugInfo = sprintf('<pre>%s</pre>', print_r($var, true));
         print_r($lineInfo . $debugInfo);
     }
+    
 
 }
