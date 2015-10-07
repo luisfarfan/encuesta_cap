@@ -30,6 +30,7 @@
 <script src="<?php echo base_url() ?>assets/js/bootstrap-table.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>assets/js/tableExport.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>assets/bootstrap-table-master/dist/extensions/export/bootstrap-table-export.js" type="text/javascript"></script>
+<script src="<?php echo base_url() ?>assets/js/jquery.battatech.excelexport.js" type="text/javascript"></script>
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="http://code.highcharts.com/modules/exporting.js"></script>
 
@@ -318,6 +319,13 @@ $("#provincias").on('change', function() {
         }
     });
 });
+
+ $("#btnExport").click(function () {
+            $("#tableExport").battatech_excelexport({
+                containerid: "tableExport",
+                datatype: 'table'
+            });
+        });
 </script>
 
 </html>

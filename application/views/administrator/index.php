@@ -1,3 +1,21 @@
+<style>
+    .class1{
+        background-color: yellowgreen;
+    }
+    .class2{
+        background-color: gold;
+    }
+    .class3{
+        background-color: aqua;
+    }
+    .class4{
+        background-color: lightblue;
+    }
+    .class5{
+        background-color: antiquewhite;
+    }
+
+</style>
 <section class = "content">
     <div class="box">
         <div class="box-header with-border">
@@ -10,13 +28,15 @@
 //        var_dump($detacursos);
 
             $deta = json_decode($detacursos);
+//            var_dump($deta);
 //        var_dump($deta);
 //        foreach ($deta as $row => $value) {
 //            echo $value->idtipo_cursos;
 //        }
             ?>
             <div class="box-body">
-                <table class="table table-bordered table-responsive">
+                <button id="btnExport" class="btn-bitbucket">Generar Excel</button>
+                <table id="tableExport" class="table table-bordered table-responsive">
                     <th>Área</th>
                     <th>Curso</th>
                     <th>Frecuencia</th>
@@ -24,7 +44,8 @@
 
                     <?php
                     foreach ($deta as $row => $value) {
-                        echo '<tr>';
+                        
+                        echo "<tr style='background-color:$value->color_tr'>";
                         echo '<td>' . $value->nombre_tipo . '</td>';
                         echo '<td>' . $value->descripcion_curso . '</td>';
                         echo '<td>' . $value->cantidad . '</td>';
