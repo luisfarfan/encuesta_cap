@@ -28,7 +28,14 @@
 //        var_dump($detacursos);
 
             $deta = json_decode($detacursos);
-//            var_dump($deta);
+            echo '<pre>';
+            var_dump($deta);
+            foreach ($deta as $row => $value) {
+                if ($deta[$row]['cantidad'] === 0) {
+                    unset($deta[$row]);
+                }
+            }
+            var_dump($deta);
 //        var_dump($deta);
 //        foreach ($deta as $row => $value) {
 //            echo $value->idtipo_cursos;
@@ -43,9 +50,11 @@
                     <th>Porcentaje</th>
 
                     <?php
+                    $count = 0;
                     foreach ($deta as $row => $value) {
-                        
-                        echo "<tr style='background-color:$value->color_tr'>";
+                        $count++;
+
+                        echo "<tr id='color$count' style='background-color:$value->color_tr'>";
                         echo '<td>' . $value->nombre_tipo . '</td>';
                         echo '<td>' . $value->descripcion_curso . '</td>';
                         echo '<td>' . $value->cantidad . '</td>';

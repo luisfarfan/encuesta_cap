@@ -3,16 +3,26 @@
     <head>
         <title>Encuesta de Necesidades de Capacitaci&oacute;n 2011</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <!--<link href="<?php echo base_url() ?>assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>-->
-        <!--<script src="<?php echo base_url() ?>assets/bootstrap/js/bootstrap.js" type="text/javascript"></script>-->
+        <link href="<?php echo base_url() ?>assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/estilo.css">
         <script language="javascript" src="<?php echo base_url() ?>assets/js/comun.js"></script>
         <script language="javascript" src="<?php echo base_url() ?>assets/js/ubigeo.js"></script>
         <script language="javascript" src="<?php echo base_url() ?>assets/js/LN.js"></script>
-        
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
         <style>
             .error{
                 color: red;
+            }
+            .entry
+            {
+                margin-top: 10px;
+            }
+
+            .glyphicon
+            {
+                font-size: 12px;
             }
         </style>
     </head>
@@ -33,7 +43,7 @@
                     </td>
                 </tr>
                 <tr>
-                    
+
                 <tr>
                 <tr>
                     <td>&nbsp;</td>
@@ -81,8 +91,8 @@
                                         maxlength="50"  
                                         onBlur="acceptLiteral(this);"
                                         class="upper"
-                                        title="Por favor, ingrese sus nombres"
-                                        required
+                                        title="Por favor, ingrese sus nombres" required
+
                                         /> <span class="rojo"></span> <span id="r1"></span> 
                                 </td>
                                 <td>&nbsp;</td>
@@ -95,8 +105,8 @@
                                         onkeypress="return alfabetoNombre(event)" 
                                         onBlur="acceptLiteralPat(this);"
                                         class="upper"
-                                        title="Por favor, ingrese sus apellidos"
-                                        required
+                                        title="Por favor, ingrese sus apellidos" required
+
                                         /> <span class="rojo"></span> <span id="r2"></span> 
                                 </td>
                                 <td>&nbsp;</td>
@@ -122,10 +132,9 @@
                                 <td>Correo Electr�nico</td>
                             </tr>
                             <tr>
-                                <td><select name="idinstituciones_publicas" id="idinstituciones_publicas" title="Debe seleccionar una institucion Publica" required>
+                                <td><select name="idinstituciones_publicas" required id="idinstituciones_publicas" title="Debe seleccionar una institucion Publica" >
                                         <option>Seleccione...</option>    
-                                    <?php
-                                        
+                                        <?php
                                         foreach ($instituciones as $row) {
                                             echo '<option value=' . $row['idinstituciones_publicas'] . '>' . $row['entidad'] . '</option>';
                                         }
@@ -142,7 +151,7 @@
                                         style="width:200px;" 
                                         onkeypress="return acceptTxt(event)" 
                                         maxlength="300"
-                                        class="upper" title="Debe escribir el area a donde pertenece" required /> 
+                                        class="upper" title="Debe escribir el area a donde pertenece"  required/> 
                                     <span id="r5"></span> 
                                 </td>
                                 <td>&nbsp;</td>
@@ -161,7 +170,7 @@
                             <tr>
                                 <td>
                                     Departamento 
-                                    <select id="cmbDpto" style="width:150px;" title="Debe seleccionar su departamento" required>
+                                    <select id="cmbDpto" style="width:150px;" required title="Debe seleccionar su departamento" >
                                         <option>---SELECCIONE</option>
                                         <?php
                                         foreach ($dpto as $row) {
@@ -173,7 +182,7 @@
                                 <td>&nbsp;</td>
                                 <td>
                                     Provincia 
-                                    <select id="cmbProv" style="width:150px;" title="Debe seleccionar su Provincia" required>
+                                    <select id="cmbProv" style="width:150px;" required title="Debe seleccionar su Provincia" >
                                         <option value="-1">Seleccione ...</option>
                                     </select>
                                     <span class="rojo"></span> <span id="r8"></span> 
@@ -181,7 +190,7 @@
                                 <td>&nbsp;</td>
                                 <td>
                                     Distrito 
-                                    <select id="cmbDist" name="idDist" style="width:150px;" title="Debe seleccionar su Distrito" required>
+                                    <select id="cmbDist" name="idDist" style="width:150px;" required title="Debe seleccionar su Distrito" >
                                         <option>Seleccione ...</option>
                                     </select>
                                     <span class="rojo"></span> <span id="r9"></span> 
@@ -294,86 +303,163 @@
                     <td>
                         <table width="100%">
                             <tr class="subgrupo">
-                                <td>1. Indique en que cursos adicionales requiere capacitarse</td>
+<!--                                <td>1. Indique en que cursos adicionales requiere capacitarse</td>-->
                             </tr>
                             <tr>
-                                <td align="center"><textarea id="sugenrencias" name="sugerencias" class="upper" ></textarea></td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center"><input type="submit" class="boton" id="btnEnviar" value="Enviar" /></td>
-                </tr>
+                            <div class="">
+                                <a id="btn_mas" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-plus"></span></a>
+                                <label>1. Indique en que cursos adicionales requiere capacitarse</label>
 
-                <tr>
-                    <td>
-                        
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp; </td>
-                </tr>
+                                <div class="entry input-group col-lg-6" id="div_otros1">
+                                    <input class="form-control" name="otros1" id="otros1" type="text" />
+                                    <span id="asdas" class="input-group-btn">
+                                        <button onclick="esconder_Div(this.id)" id="btn_1" class="btn btn-success btn-add" type="button">
+                                            <span class="glyphicon glyphicon-minus"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <div class="entry input-group col-lg-6 hidden" id="div_otros2">
+                                    <input class="form-control" name="otros2" id="otros2" type="text" />
+                                    <span class="input-group-btn">
+                                        <button onclick="esconder_Div(this.id)" id="btn_2" class="btn btn-success btn-add" type="button">
+                                            <span class="glyphicon glyphicon-minus"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <div class="entry input-group col-lg-6 hidden" id="div_otros3">
+                                    <input class="form-control" name="otros3" id="otros3" type="text" />
+                                    <span class="input-group-btn">
+                                        <button onclick="esconder_Div(this.id)" id="btn_3" class="btn btn-success btn-add" type="button">
+                                            <span class="glyphicon glyphicon-minus"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <!--                                <div class="entry input-group col-lg-6 hidden" id="div_otros4">
+                                                                    <input class="form-control" name="otros4" type="text" />
+                                                                    <span class="input-group-btn">
+                                                                        <button onclick="esconder_Div(this.id)" id="btn_4" class="btn btn-success btn-add" type="button">
+                                                                            <span class="glyphicon glyphicon-minus"></span>
+                                                                        </button>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="entry input-group col-lg-6 hidden" id="div_otros5">
+                                                                    <input class="form-control" name="otros5" type="text" />
+                                                                    <span class="input-group-btn">
+                                                                        <button onclick="esconder_Div(this.id)" id="btn_5" class="btn btn-success btn-add" type="button">
+                                                                            <span class="glyphicon glyphicon-minus"></span>
+                                                                        </button>
+                                                                    </span>
+                                                                </div>-->
+                            </div>
 
-                <tr>
-                    <td class="pie" align="center" bgcolor="#0F83E1">Copyright � INEI 2015. Derechos Reservados</td>
+                            <!--<td align="center"><textarea id="sugenrencias" name="sugerencias" class="upper" ></textarea></td>-->
                 </tr>
             </table>
-           
-        </form>
-    </body>
-    <script type="text/javascript" src="<?php echo base_url() ?>assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url() ?>assets/my_js/index.js"></script>
-    <script src="<?php echo base_url() ?>assets/dist/jquery.validate.js"></script>
-    <script>
+
+        </td>
+    </tr>
+    <tr>
+        <td align="center"><input type="submit" class="boton" id="btnEnviar" value="Enviar" /></td>
+    </tr>
+
+    <tr>
+        <td>
+
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp; </td>
+    </tr>
+
+    <tr>
+        <td class="pie" align="center" bgcolor="#0F83E1">Copyright  INEI 2015. Derechos Reservados</td>
+    </tr>
+</table>
+
+</form>
+</body>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/my_js/index.js"></script>
+<script src="<?php echo base_url() ?>assets/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+<script src="<?php echo base_url() ?>assets/dist/jquery.validate.js"></script>
+
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script>
+                                            $(function () {
+
+                                            });
+
+                                            $('#btn_mas').click(function () {
+                                                for (var i = 1; i <= 5; i++) {
+                                                    if ($('#div_otros' + i).hasClass('hidden')) {
+                                                        $('#div_otros' + i).removeClass('hidden');
+                                                        break;
+                                                    }
+                                                }
+                                            });
+
+                                            function esconder_Div(id) {
+//                                                console.log($(id).parent());
+//                                                console.log(id);
+//                                                console.log($('#' + id).parents('div').addClass('hidden'));
+                                                $('#' + id).parent().parent().addClass('hidden');
+                                            }
+
 //
-    $('#frm_id').submit(function(){
-        var checked=$('#parte3 :checked').length;
-        if(checked===0){
-            alert("Tiene que marcar al menos 1 curso");
-            return false;
-        }else{
+                                            $('#frm_id').submit(function () {
+                                                var checked = $('#parte3 :checked').length;
+                                                if (checked === 0) {
+                                                    alert("Tiene que marcar al menos 1 curso");
+                                                    return false;
+                                                } else {
 
-        }
+                                                }
+                                            });
+//                                            $().ready(function () {
+//
+//                                                var container = $('div.container');
+//                                                // validate the form when it is submitted
+//                                                var validator = $("#frm_id").validate({
+//                                                    errorContainer: container,
+//                                                    errorLabelContainer: $("ol", container),
+//                                                    wrapper: 'li'
+//                                                });
+//                                                $(".cancel").click(function () {
+//                                                    validator.resetForm();
+//                                                });
+//                                            });
+</script>
+<script>
+
+
+    var base_url = window.location.origin;
+    $("#cmbDpto").on('change', function () {
+        $.ajax({
+            url: '<?php echo base_url() ?>index.php/encuesta/getProvincias/' + this.value,
+            success: function (response, textStatus, jqXHR) {
+                $('#cmbProv').html('<option>Seleccione..</option>' + response);
+                $('#cmbDist').empty();
+                $('#cmbDist').html('<option>Seleccione..</option>');
+            }
+        })
     });
-                                    $().ready(function () {
-
-                                       var container = $('div.container');
-                                        // validate the form when it is submitted
-                                        var validator = $("#frm_id").validate({
-                                            errorContainer: container,
-                                            errorLabelContainer: $("ol", container),
-                                            wrapper: 'li'
-                                        });
-                                        $(".cancel").click(function () {
-                                            validator.resetForm();
-                                        });
-                                    });
-    </script>
-    <script>
-
-
-        var base_url = window.location.origin;
-        $("#cmbDpto").on('change', function () {
-            $.ajax({
-                url: '<?php echo base_url() ?>index.php/encuesta/getProvincias/' + this.value,
-                success: function (response, textStatus, jqXHR) {
-                    $('#cmbProv').html('<option>Seleccione..</option>'+response);
-                    $('#cmbDist').empty();
-                    $('#cmbDist').html('<option>Seleccione..</option>');
-                }
-            })
+    $("#cmbProv").on('change', function () {
+        $.ajax({
+            url: '<?php echo base_url() ?>index.php/encuesta/getDistritos/' + this.value,
+            success: function (response, textStatus, jqXHR) {
+                $('#cmbDist').html('<option>Seleccione..</option>' + response);
+            }
         });
-        $("#cmbProv").on('change', function () {
-            $.ajax({
-                url: '<?php echo base_url() ?>index.php/encuesta/getDistritos/' + this.value,
-                success: function (response, textStatus, jqXHR) {
-                    $('#cmbDist').html('<option>Seleccione..</option>'+response);
-                }
-            });
-        });
-        
+    }
+    );
 
 
-    </script>
+
+    $('#otros1').autocomplete({
+        source: "http://localhost:81/encuesta_cap/index.php/encuesta/get_otros"
+    });
+</script>
+
+</script>
 </html>

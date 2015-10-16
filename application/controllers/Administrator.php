@@ -10,8 +10,8 @@ class Administrator extends CI_Controller {
     }
 
     public function index() {
-        $data=array('detacursos'=>$this->detallebyCantidad_Percent());
-        $this->layout('administrator/index',$data);
+        $data = array('detacursos' => $this->detallebyCantidad_Percent());
+        $this->layout('administrator/index', $data);
     }
 
     public function ubigeos() {
@@ -21,9 +21,10 @@ class Administrator extends CI_Controller {
         $data['chartDist'] = $this->adm_model->chartDist();
         $this->layout('administrator/ubigeo', $data);
     }
-    public function topcursos(){
-        $data['topcursos']=  $this->adm_model->chartTopCursos();
-        $this->layout('administrator/topcursos',$data);
+
+    public function topcursos() {
+        $data['topcursos'] = $this->adm_model->chartTopCursos();
+        $this->layout('administrator/topcursos', $data);
     }
 
     public function chartubigeos() {
@@ -61,10 +62,21 @@ class Administrator extends CI_Controller {
         $data = $this->adm_model->databyDistrito($iddist);
         echo json_encode($data);
     }
-    public function detallebyCantidad_Percent(){
-        $deta=$this->adm_model->detalleCursos();
+
+    public function detallebyCantidad_Percent() {
+        $deta = $this->adm_model->detalleCursos();
         return json_encode($deta);
     }
+
+    public function getLastCurso() {
+
+        echo $this->adm_model->get_last_curso();
+    }
+
+    public function prueba() {
+        
+    }
+
     function debug() {
         $trace = debug_backtrace();
         $rootPath = dirname(dirname(__FILE__));
@@ -75,6 +87,5 @@ class Administrator extends CI_Controller {
         $debugInfo = sprintf('<pre>%s</pre>', print_r($var, true));
         print_r($lineInfo . $debugInfo);
     }
-    
 
 }

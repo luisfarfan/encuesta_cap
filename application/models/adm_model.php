@@ -55,20 +55,85 @@ having idDist;";
         $query = $this->db->query($sql);
         return $query->result_Array();
     }
-    public function chartTopCursos(){
-        $sql="select descripcion_curso,count(id_cursos) as cantidad from cursos_by_persona group by id_cursos having id_cursos
+
+    public function chartTopCursos() {
+        $sql = "select descripcion_curso,count(id_cursos) as cantidad from cursos_by_persona group by id_cursos having id_cursos
 order by count(id_cursos) desc limit 5";
-        $query=  $this->db->query($sql);
+        $query = $this->db->query($sql);
         return $query->result_Array();
     }
-    public function detalleCursos(){
-        $sql="select color_tr,nombre_tipo,idtipo_cursos,descripcion_curso,count(c.id_cursos) as cantidad,
+
+
+
+    public function detalleCursos() {
+        $sql = "select color_tr,nombre_tipo,idtipo_cursos,descripcion_curso,count(c.id_cursos) as cantidad,
 CAST((select count(id_cursos) from cursos_by_persona csu where csu.id_cursos=c.id_cursos group by id_cursos)*100/
 (select count(nombre_tipo) from cursos_by_persona csub where csub.idtipo_cursos=c.idtipo_cursos group by nombre_tipo) as decimal(4,1))
 as porcentaje
 from cursos_by_persona c
-group by id_cursos order by idtipo_cursos,porcentaje desc";
-        $query=$this->db->query($sql);
+where idtipo_cursos=1
+group by id_cursos 
+UNION ALL
+select '',nombre_tipo,'','TOTALES',COUNT(*),'100%' from cursos_by_persona c 
+where idtipo_cursos=1
+UNION ALL
+select color_tr,nombre_tipo,idtipo_cursos,descripcion_curso,count(c.id_cursos) as cantidad,
+CAST((select count(id_cursos) from cursos_by_persona csu where csu.id_cursos=c.id_cursos group by id_cursos)*100/
+(select count(nombre_tipo) from cursos_by_persona csub where csub.idtipo_cursos=c.idtipo_cursos group by nombre_tipo) as decimal(4,1))
+as porcentaje
+from cursos_by_persona c
+where idtipo_cursos=2
+group by id_cursos 
+UNION ALL
+select '',nombre_tipo,'','TOTALES',COUNT(*),'100%' from cursos_by_persona c 
+where idtipo_cursos=2
+UNION ALL 
+select color_tr,nombre_tipo,idtipo_cursos,descripcion_curso,count(c.id_cursos) as cantidad,
+CAST((select count(id_cursos) from cursos_by_persona csu where csu.id_cursos=c.id_cursos group by id_cursos)*100/
+(select count(nombre_tipo) from cursos_by_persona csub where csub.idtipo_cursos=c.idtipo_cursos group by nombre_tipo) as decimal(4,1))
+as porcentaje
+from cursos_by_persona c
+where idtipo_cursos=3
+group by id_cursos 
+UNION ALL
+select '',nombre_tipo,'','TOTALES',COUNT(*),'100%' from cursos_by_persona c 
+where idtipo_cursos=3
+UNION ALL
+select color_tr,nombre_tipo,idtipo_cursos,descripcion_curso,count(c.id_cursos) as cantidad,
+CAST((select count(id_cursos) from cursos_by_persona csu where csu.id_cursos=c.id_cursos group by id_cursos)*100/
+(select count(nombre_tipo) from cursos_by_persona csub where csub.idtipo_cursos=c.idtipo_cursos group by nombre_tipo) as decimal(4,1))
+as porcentaje
+from cursos_by_persona c
+where idtipo_cursos=4
+group by id_cursos 
+UNION ALL
+select '',nombre_tipo,'','TOTALES',COUNT(*),'100%' from cursos_by_persona c 
+where idtipo_cursos=4
+UNION ALL
+select color_tr,nombre_tipo,idtipo_cursos,descripcion_curso,count(c.id_cursos) as cantidad,
+CAST((select count(id_cursos) from cursos_by_persona csu where csu.id_cursos=c.id_cursos group by id_cursos)*100/
+(select count(nombre_tipo) from cursos_by_persona csub where csub.idtipo_cursos=c.idtipo_cursos group by nombre_tipo) as decimal(4,1))
+as porcentaje
+from cursos_by_persona c
+where idtipo_cursos=5
+group by id_cursos 
+UNION ALL
+select '',nombre_tipo,'','TOTALES',COUNT(*),'100%' from cursos_by_persona c 
+where idtipo_cursos=5
+UNION ALL
+select color_tr,nombre_tipo,idtipo_cursos,descripcion_curso,count(c.id_cursos) as cantidad,
+CAST((select count(id_cursos) from cursos_by_persona csu where csu.id_cursos=c.id_cursos group by id_cursos)*100/
+(select count(nombre_tipo) from cursos_by_persona csub where csub.idtipo_cursos=c.idtipo_cursos group by nombre_tipo) as decimal(4,1))
+as porcentaje
+from cursos_by_persona c
+where idtipo_cursos=6
+group by id_cursos 
+UNION ALL
+select 'tomato',nombre_tipo,'','TOTALES',COUNT(*),'100%' from cursos_by_persona c 
+where idtipo_cursos=6 order by nombre_tipo,cantidad asc
+";
+        $query = $this->db->query($sql);
         return $query->result_Array();
     }
+
 }

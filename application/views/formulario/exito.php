@@ -1,4 +1,12 @@
-<?php var_dump($_SESSION['enviado']) ?>
+<?php
+//if(isset($_SESSION['nombres'])){
+session_start();
+//var_dump($_SESSION['nombres']);
+$nombres = $_SESSION['nombres'];
+//}else{
+//    header('Location:'.base_url().'index.php/encuesta');
+//}
+?>
 <html>
     <link href="<?php echo base_url() ?>assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
 

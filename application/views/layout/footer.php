@@ -33,9 +33,12 @@
 <script src="<?php echo base_url() ?>assets/js/jquery.battatech.excelexport.js" type="text/javascript"></script>
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="http://code.highcharts.com/modules/exporting.js"></script>
-
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
-
+    $(function () {
+        alert($('#color1').css('background-color'));
+    }); 
     var $table = $('#table');
     $(function () {
 
@@ -126,8 +129,10 @@ if (isset($chartDpto)) {
     foreach ($chartDpto as $pro => $valor) {
         ?>
                                     ['<?php echo $valor['departamento'] ?>', <?php echo $valor['cantidad'] ?>],
-    <?php }
-} ?>
+        <?php
+    }
+}
+?>
                         ],
                         dataLabels: {
                             enabled: true,
@@ -176,8 +181,10 @@ if (isset($chartDist)) {
     foreach ($chartDist as $pro => $valor) {
         ?>
                                     ['<?php echo $valor['distrito'] ?>', <?php echo $valor['cantidad'] ?>],
-    <?php }
-} ?>
+        <?php
+    }
+}
+?>
                         ],
                         dataLabels: {
                             enabled: true,
@@ -226,8 +233,10 @@ if (isset($chartProv)) {
     foreach ($chartProv as $pro => $valor) {
         ?>
                                     ['<?php echo $valor['provincia'] ?>', <?php echo $valor['cantidad'] ?>],
-    <?php }
-} ?>
+        <?php
+    }
+}
+?>
                         ],
                         dataLabels: {
                             enabled: true,
@@ -277,8 +286,10 @@ if (isset($topcursos)) {
     foreach ($topcursos as $pro => $valor) {
         ?>
                                     ['<?php echo $valor['descripcion_curso'] ?>', <?php echo $valor['cantidad'] ?>],
-    <?php }
-} ?>
+        <?php
+    }
+}
+?>
                         ],
                         dataLabels: {
                             enabled: true,
@@ -296,36 +307,39 @@ if (isset($topcursos)) {
             });
         });
     });
-    
-    $("#departamentos").on('change', function() {
-    $.ajax({
-        url: '<?php echo base_url()?>index.php/encuesta/getProvincias/' + this.value,
-        success: function(response, textStatus, jqXHR) {
-            $('#provincias').html("<option>Seleccione...</option>"+response);
-            $('#distritos').empty();
+
+    $("#departamentos").on('change', function () {
+        $.ajax({
+            url: '<?php echo base_url() ?>index.php/encuesta/getProvincias/' + this.value,
+            success: function (response, textStatus, jqXHR) {
+                $('#provincias').html("<option>Seleccione...</option>" + response);
+                $('#distritos').empty();
 //            $('#provincias').html("<option>Seleccione...</option>");
-            console.log(response)
-        }
-    })
-});
-
-$("#provincias").on('change', function() {
-    $.ajax({
-        url: '<?php echo base_url()?>index.php/encuesta/getDistritos/' + this.value,
-        success: function(response, textStatus, jqXHR) {
-            $('#distritos').html("<option>Seleccione...</option>"+response);
-//            $('#distritos').html("<option>Seleccione...</option>");
-            console.log(response)
-        }
+                console.log(response)
+            }
+        })
     });
-});
 
- $("#btnExport").click(function () {
-            $("#tableExport").battatech_excelexport({
-                containerid: "tableExport",
-                datatype: 'table'
-            });
+    $("#provincias").on('change', function () {
+        $.ajax({
+            url: '<?php echo base_url() ?>index.php/encuesta/getDistritos/' + this.value,
+            success: function (response, textStatus, jqXHR) {
+                $('#distritos').html("<option>Seleccione...</option>" + response);
+//            $('#distritos').html("<option>Seleccione...</option>");
+                console.log(response)
+            }
         });
-</script>
+    });
 
+    $("#btnExport").click(function () {
+        $("#tableExport").battatech_excelexport({
+            containerid: "tableExport",
+            datatype: 'table'
+        });
+    });
+</script>
+<script>
+
+
+</script>
 </html>
